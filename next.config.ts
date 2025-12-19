@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/nextjs-github-pages",
+  basePath: "/income-conversion-calculator",
   images: {
     unoptimized: true,
   },
