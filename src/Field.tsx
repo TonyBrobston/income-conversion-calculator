@@ -2,12 +2,14 @@ import { Box, Typography, InputLabel, InputAdornment, Input } from "@mui/materia
 
 export default function Field({
   label,
-  defaultValue,
+  value,
+  onChange,
   adornment,
   adornmentPosition,
 }: Readonly<{
   label: string;
-  defaultValue?: number;
+  value: number;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   adornment: string;
   adornmentPosition: 'start'|'end';
 }>) {
@@ -17,7 +19,8 @@ export default function Field({
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <Input
         id={id}
-        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         startAdornment={adornmentPosition === 'start' ? adornment : undefined}
         endAdornment={adornmentPosition === 'end' ? adornment : undefined}
         inputProps={{
