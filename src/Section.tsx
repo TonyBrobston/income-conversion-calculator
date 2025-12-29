@@ -8,8 +8,8 @@ export default function Section({
   title: string;
   children?: React.ReactNode;
 }>) {
-  return <Box sx={{backgroundColor: '#1e1e1e', color: '#ffffff'}}>
-    <Typography variant="subtitle1" fontWeight="bold">{title}</Typography>
+  return <Box sx={{backgroundColor: '#1e1e1e', color: '#ffffff', padding: '24px', borderRadius: '6px'}}>
+    <Typography variant="h6" fontWeight="bold">{title}</Typography>
     {children}
   </Box>
 }
