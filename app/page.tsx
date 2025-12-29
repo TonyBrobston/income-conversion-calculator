@@ -18,13 +18,16 @@ export default function Home() {
         <Box sx={{display: 'flex', gap: '20px'}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
             <Section title="Current W2 Specs">
-              <Field label="Annual Base Salary" adornment="$" adornmentPosition="start" />
-              <Field label="Annual Bonus/Commission" adornment="$" adornmentPosition="start" />
-              <Field label="401k Match (%)" adornment="%" adornmentPosition="end" />
+              <Field label="Annual Base Salary" defaultValue={0} adornment="$" adornmentPosition="start" />
             </Section>
             <Section title="Benefits & Perks">(TBD)</Section>
           </Box>
           <Section title="Target Hourly Rate">
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <Typography aria-label="Target Hourly Rate" variant="h3">
+                $0
+              </Typography>
+            </Box>
           </Section>
         </Box>
       </Box>
