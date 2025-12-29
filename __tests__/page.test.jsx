@@ -6,8 +6,11 @@ describe('Page', () => {
   it('checks default calculator output', () => {
     render(<Page />)
 
-    const input = screen.getByLabelText('Annual Base Salary');
-    expect(input).toHaveValue('0');
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+    expect(annualBaseSalaryInput).toHaveValue('0');
+
+    const matchInput = screen.getByLabelText('401k Match (%)');
+    expect(matchInput).toHaveValue('0');
 
     const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
     expect(targetHourlyRate).toHaveTextContent('$0');
@@ -22,5 +25,20 @@ describe('Page', () => {
 
     const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
     expect(targetHourlyRate).toHaveTextContent('$48.07');
+  })
+
+  it('checks calculator output for base salary and 401k match', () => {
+    render(<Page />)
+
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+    fireEvent.change(annualBaseSalaryInput, {target: { value: '100000'}});
+    expect(annualBaseSalaryInput).toHaveValue('100000');
+
+    const matchInput = screen.getByLabelText('401k Match (%)');
+    fireEvent.change(matchInput, {target: { value: '3'}});
+    expect(matchInput).toHaveValue('3');
+
+    const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
+    expect(targetHourlyRate).toHaveTextContent('$49.51');
   })
 })
