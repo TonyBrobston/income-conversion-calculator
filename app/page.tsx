@@ -28,7 +28,7 @@ export default function Home() {
         <Box sx={{display: 'flex', gap: '20px'}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
             <Section title="Current W2 Specs">
-              <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(event.target.value)}} adornment="$" adornmentPosition="start" />
+              <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
             </Section>
             <Section title="Benefits & Perks">(TBD)</Section>
           </Box>
