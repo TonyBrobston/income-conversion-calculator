@@ -16,7 +16,7 @@ describe('Page', () => {
     expect(targetHourlyRate).toHaveTextContent('$0');
   })
 
-  it('checks basically calculator output', () => {
+  it('checks calculator output for base salary', () => {
     render(<Page />)
 
     const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
@@ -25,7 +25,7 @@ describe('Page', () => {
     expect(annualBaseSalaryInput).toHaveValue(salary);
 
     const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
-    expect(targetHourlyRate).toHaveTextContent('$48.07');
+    expect(targetHourlyRate).toHaveTextContent('$51.75');
   })
 
   it('checks calculator output for base salary and 401k match', () => {
@@ -42,7 +42,7 @@ describe('Page', () => {
     expect(matchInput).toHaveValue(match);
 
     const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
-    expect(targetHourlyRate).toHaveTextContent('$49.51');
+    expect(targetHourlyRate).toHaveTextContent('$53.19');
   })
 
   it('checks calculator output for base salary, 401k match, and annual bonus', () => {
@@ -62,6 +62,40 @@ describe('Page', () => {
     expect(bonusInput).toHaveValue(bonus);
 
     const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
-    expect(targetHourlyRate).toHaveTextContent('$51.92');
+    expect(targetHourlyRate).toHaveTextContent('$55.6');
+  })
+
+  it('checks calculator output for base salary and vacation days', () => {
+    render(<Page />)
+
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+    const salary = '100000'
+    fireEvent.change(annualBaseSalaryInput, {target: { value: salary}});
+    expect(annualBaseSalaryInput).toHaveValue(salary);
+
+    const vacationDaysInput = screen.getByLabelText('Vacation Days');
+    const vacationDays = '15'
+    fireEvent.change(vacationDaysInput, {target: { value: vacationDays}});
+    expect(vacationDaysInput).toHaveValue(vacationDays);
+
+    const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
+    expect(targetHourlyRate).toHaveTextContent('$54.92');
+  })
+
+  it('checks calculator output for base salary and holidays', () => {
+    render(<Page />)
+
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+    const salary = '100000'
+    fireEvent.change(annualBaseSalaryInput, {target: { value: salary}});
+    expect(annualBaseSalaryInput).toHaveValue(salary);
+
+    const holidaysInput = screen.getByLabelText('Holidays');
+    const holidays = '10'
+    fireEvent.change(holidaysInput, {target: { value: holidays}});
+    expect(holidaysInput).toHaveValue(holidays);
+
+    const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
+    expect(targetHourlyRate).toHaveTextContent('$53.82');
   })
 })

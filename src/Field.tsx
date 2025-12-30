@@ -10,8 +10,8 @@ export default function Field({
   label: string;
   value: number;
   onChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
-  adornment: string;
-  adornmentPosition: 'start'|'end';
+  adornment?: string;
+  adornmentPosition?: 'start'|'end';
 }>) {
   const toKebabCase = (value: string) => value.replaceAll(' ', '-').toLowerCase()
   const id = toKebabCase(label);

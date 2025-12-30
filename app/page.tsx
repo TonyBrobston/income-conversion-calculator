@@ -10,15 +10,22 @@ export default function Home() {
   const [annualBaseSalary, setAnnualBaseSalary] = useState(0);
   const [match, setMatch] = useState(0);
   const [annualBonus, setAnnualBonus] = useState(0);
+  const [vacationDays, setVacationDays] = useState(0);
+  const [holidays, setHolidays] = useState(0);
   const [targetHourlyRate, setTargetHourlyRate] = useState(0);
+  const roundDownWithTwoDecimals = (value: number): number => Math.floor(value * 100) / 100;
 
   useEffect(() => {
     const matchDollarAmount = annualBaseSalary * (match / 100);
-    const hourlyRate = (annualBaseSalary + matchDollarAmount + annualBonus) / 2080;
-    const roundDownWithTwoDecimals = (value: number): number => Math.floor(value * 100) / 100
-    const roundedHourlyRate = roundDownWithTwoDecimals(hourlyRate)
+    const totalW2Value = annualBaseSalary + matchDollarAmount + annualBonus
+    const employerFicaTax = annualBaseSalary * 0.0765;
+    const totalTargetRevenue = totalW2Value + employerFicaTax;
+    const unpaidDays = vacationDays + holidays;
+    const billableHours = 2080 - (unpaidDays * 8);
+    const hourlyRate = totalTargetRevenue / billableHours;
+    const roundedHourlyRate = roundDownWithTwoDecimals(hourlyRate);
     setTargetHourlyRate(roundedHourlyRate);
-  }, [annualBaseSalary, match, annualBonus]);
+  }, [annualBaseSalary, match, annualBonus, vacationDays, holidays]);
 
   return (
     <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', backgroundColor: '#121212' }}>
@@ -34,6 +41,8 @@ export default function Home() {
               <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
               <Field label="401k Match (%)" value={match} onChange={(event) => {setMatch(parseInt(event.target.value))}} adornment="%" adornmentPosition="end" />
               <Field label="Annual Bonus/Commission" value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
+              <Field label="Vacation Days" value={vacationDays} onChange={(event) => {setVacationDays(parseInt(event.target.value))}} />
+              <Field label="Holidays" value={holidays} onChange={(event) => {setHolidays(parseInt(event.target.value))}} />
             </Section>
             <Section title="Benefits & Perks">(TBD)</Section>
           </Box>
