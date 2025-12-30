@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import { Typography } from "@mui/material";
 import Section from '../src/Section'
@@ -13,20 +13,15 @@ export default function Home() {
   const [annualBonus, setAnnualBonus] = useState(0);
   const [vacationDays, setVacationDays] = useState(0);
   const [holidays, setHolidays] = useState(0);
-  const [targetHourlyRate, setTargetHourlyRate] = useState(0);
+  const matchDollarAmount = annualBaseSalary * (match / 100);
+  const totalW2Value = annualBaseSalary + matchDollarAmount + annualBonus
+  const employerFicaTax = annualBaseSalary * 0.0765;
+  const totalTargetRevenue = totalW2Value + employerFicaTax;
+  const unpaidDays = vacationDays + holidays;
+  const billableHours = 2080 - (unpaidDays * 8);
+  const hourlyRate = totalTargetRevenue / billableHours;
   const roundDownWithTwoDecimals = (value: number): number => Math.floor(value * 100) / 100;
-
-  useEffect(() => {
-    const matchDollarAmount = annualBaseSalary * (match / 100);
-    const totalW2Value = annualBaseSalary + matchDollarAmount + annualBonus
-    const employerFicaTax = annualBaseSalary * 0.0765;
-    const totalTargetRevenue = totalW2Value + employerFicaTax;
-    const unpaidDays = vacationDays + holidays;
-    const billableHours = 2080 - (unpaidDays * 8);
-    const hourlyRate = totalTargetRevenue / billableHours;
-    const roundedHourlyRate = roundDownWithTwoDecimals(hourlyRate);
-    setTargetHourlyRate(roundedHourlyRate);
-  }, [annualBaseSalary, match, annualBonus, vacationDays, holidays]);
+  const targetHourlyRate = roundDownWithTwoDecimals(hourlyRate);
 
   return (
     <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', backgroundColor: '#121212' }}>

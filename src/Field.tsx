@@ -1,4 +1,4 @@
-import { Box, Typography, InputLabel, InputAdornment, Input } from "@mui/material";
+import { Box, InputLabel, Input } from "@mui/material";
 
 export default function Field({
   label,
