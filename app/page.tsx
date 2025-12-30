@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import { Typography } from "@mui/material";
 import Section from '../src/Section'
 import Field from '../src/Field'
+import { removeNonNumeric } from '../src/numbers';
 
 export default function Home() {
   const [annualBaseSalary, setAnnualBaseSalary] = useState(0);
@@ -38,11 +39,11 @@ export default function Home() {
         <Box sx={{display: 'flex', gap: '20px'}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
             <Section title="W2">
-              <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
-              <Field label="401k Match (%)" value={match} onChange={(event) => {setMatch(parseInt(event.target.value))}} adornment="%" adornmentPosition="end" />
-              <Field label="Annual Bonus/Commission" value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
-              <Field label="Vacation Days" value={vacationDays} onChange={(event) => {setVacationDays(parseInt(event.target.value))}} />
-              <Field label="Holidays" value={holidays} onChange={(event) => {setHolidays(parseInt(event.target.value))}} />
+              <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(removeNonNumeric(event.target.value)))}} adornment="$" adornmentPosition="start" />
+              <Field label="401k Match (%)" value={match} onChange={(event) => {setMatch(parseInt(removeNonNumeric(event.target.value)))}} adornment="%" adornmentPosition="end" />
+              <Field label="Annual Bonus/Commission" value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(removeNonNumeric(event.target.value)))}} adornment="$" adornmentPosition="start" />
+              <Field label="Vacation Days" value={vacationDays} onChange={(event) => {setVacationDays(parseInt(removeNonNumeric(event.target.value)))}} />
+              <Field label="Holidays" value={holidays} onChange={(event) => {setHolidays(parseInt(removeNonNumeric(event.target.value)))}} />
             </Section>
             <Section title="Benefits & Perks">(TBD)</Section>
           </Box>

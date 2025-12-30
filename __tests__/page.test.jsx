@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Page from '../app/page'
 
 describe('Page', () => {
@@ -98,4 +99,21 @@ describe('Page', () => {
     const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
     expect(targetHourlyRate).toHaveTextContent('$53.82');
   })
+
+  it.each([
+    ['Annual Base Salary', '100000'],
+    ['401k Match (%)', '5'],
+    ['Annual Bonus/Commission', '5000'],
+    ['Vacation Days', '15'],
+    ['Holidays', '10'],
+  ])('clearing "%s" field should result in 0', async (label, initialValue) => {
+    const user = userEvent.setup();
+    render(<Page />);
+    const input = screen.getByLabelText(label);
+    fireEvent.change(input, { target: { value: initialValue } });
+
+    await user.clear(input);
+
+    expect(input).toHaveValue('0');
+  });
 })
