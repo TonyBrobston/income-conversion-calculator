@@ -30,7 +30,7 @@ export default function Home() {
         </Box>
         <Box sx={{display: 'flex', gap: '20px'}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
-            <Section title="Current W2 Specs">
+            <Section title="W2">
               <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
               <Field label="401k Match (%)" value={match} onChange={(event) => {setMatch(parseInt(event.target.value))}} adornment="%" adornmentPosition="end" />
               <Field label="Annual Bonus/Commission" value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
