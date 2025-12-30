@@ -9,15 +9,16 @@ import Field from '../src/Field'
 export default function Home() {
   const [annualBaseSalary, setAnnualBaseSalary] = useState(0);
   const [match, setMatch] = useState(0);
+  const [annualBonus, setAnnualBonus] = useState(0);
   const [targetHourlyRate, setTargetHourlyRate] = useState(0);
 
   useEffect(() => {
     const matchDollarAmount = annualBaseSalary * (match / 100);
-    const hourlyRate = (annualBaseSalary + matchDollarAmount) / 2080;
+    const hourlyRate = (annualBaseSalary + matchDollarAmount + annualBonus) / 2080;
     const roundDownWithTwoDecimals = (value: number): number => Math.floor(value * 100) / 100
     const roundedHourlyRate = roundDownWithTwoDecimals(hourlyRate)
     setTargetHourlyRate(roundedHourlyRate);
-  }, [annualBaseSalary, match]);
+  }, [annualBaseSalary, match, annualBonus]);
 
   return (
     <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', backgroundColor: '#121212' }}>
@@ -32,6 +33,7 @@ export default function Home() {
             <Section title="Current W2 Specs">
               <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
               <Field label="401k Match (%)" value={match} onChange={(event) => {setMatch(parseInt(event.target.value))}} adornment="%" adornmentPosition="end" />
+              <Field label="Annual Bonus/Commission" value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(event.target.value))}} adornment="$" adornmentPosition="start" />
             </Section>
             <Section title="Benefits & Perks">(TBD)</Section>
           </Box>
