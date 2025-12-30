@@ -116,4 +116,14 @@ describe('Page', () => {
 
     expect(input).toHaveValue('0');
   });
+
+  it('should focus first field of page on first render', () => {
+    render(<Page />);
+
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+
+    expect(annualBaseSalaryInput).toHaveFocus();
+    expect(annualBaseSalaryInput.selectionStart).toBe(0);
+    expect(annualBaseSalaryInput.selectionEnd).toBe(annualBaseSalaryInput.value.length);
+  });
 })

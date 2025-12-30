@@ -34,7 +34,7 @@ export default function Home() {
         <Box sx={{display: 'flex', gap: '20px'}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
             <Section title="W2">
-              <Field label="Annual Base Salary" value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(removeNonNumeric(event.target.value)))}} adornment="$" adornmentPosition="start" />
+              <Field label="Annual Base Salary" autoFocus value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(removeNonNumeric(event.target.value)))}} adornment="$" adornmentPosition="start" />
               <Field label="401k Match (%)" value={match} onChange={(event) => {setMatch(parseInt(removeNonNumeric(event.target.value)))}} adornment="%" adornmentPosition="end" />
               <Field label="Annual Bonus/Commission" value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(removeNonNumeric(event.target.value)))}} adornment="$" adornmentPosition="start" />
               <Field label="Vacation Days" value={vacationDays} onChange={(event) => {setVacationDays(parseInt(removeNonNumeric(event.target.value)))}} />
