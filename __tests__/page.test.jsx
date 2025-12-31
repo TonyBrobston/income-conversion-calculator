@@ -100,6 +100,18 @@ describe('Page', () => {
     expect(targetHourlyRate).toHaveTextContent('$53.82');
   })
 
+  it('should always have two decimals for hourly rate', () => {
+    render(<Page />)
+
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+    const salary = '40000'
+    fireEvent.change(annualBaseSalaryInput, {target: { value: salary}});
+    expect(annualBaseSalaryInput).toHaveValue(salary);
+
+    const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
+    expect(targetHourlyRate).toHaveTextContent('$20.70');
+  });
+
   it.each([
     ['Annual Base Salary', '100000'],
     ['401k Match (%)', '5'],

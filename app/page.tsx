@@ -45,7 +45,7 @@ export default function Home() {
           <Section title="Target Hourly Rate">
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Typography aria-label="Target Hourly Rate" variant="h3">
-                ${targetHourlyRate}
+                ${targetHourlyRate.toFixed(2)}
               </Typography>
             </Box>
           </Section>
