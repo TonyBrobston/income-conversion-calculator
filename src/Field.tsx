@@ -19,18 +19,17 @@ export default function Field({
   const toKebabCase = (value: string) => value.replaceAll(' ', '-').toLowerCase()
   const id = toKebabCase(label);
   const inputRef = useRef<HTMLInputElement>(null)
-  useEffect(() => {
-    if (autoFocus === true && inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.select();
-    }
-  }, [])
   return <Box sx={{display: 'flex', gap: '8px', alignItems: 'center', justifyContent: 'space-between'}}>
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <Input
         id={id}
         value={value}
         onChange={onChange}
+        onFocus={() => {
+          setTimeout(() => {
+            inputRef.current?.select();
+          }, 0);
+        }}
         inputRef={inputRef}
         startAdornment={adornmentPosition === 'start' ? adornment : undefined}
         endAdornment={adornmentPosition === 'end' ? adornment : undefined}

@@ -117,13 +117,20 @@ describe('Page', () => {
     expect(input).toHaveValue('0');
   });
 
-  it('should focus first field of page on first render', () => {
+  it.each([
+    ['Annual Base Salary'],
+    ['401k Match (%)'],
+    ['Annual Bonus/Commission'],
+    ['Vacation Days'],
+    ['Holidays'],
+  ])('should select the content when "%s" is focused via click', async (label) => {
+    const user = userEvent.setup();
     render(<Page />);
+    const input = screen.getByLabelText(label);
+    await user.click(input);
 
-    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
-
-    expect(annualBaseSalaryInput).toHaveFocus();
-    expect(annualBaseSalaryInput.selectionStart).toBe(0);
-    expect(annualBaseSalaryInput.selectionEnd).toBe(annualBaseSalaryInput.value.length);
+    expect(input).toHaveFocus();
+    expect(input.selectionStart).toBe(0);
+    expect(input.selectionEnd).toBe(input.value.length);
   });
 })
