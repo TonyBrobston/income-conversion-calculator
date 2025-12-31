@@ -33,7 +33,7 @@ export default function Home() {
   const targetHourlyRate = roundDownWithTwoDecimals(hourlyRate);
 
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', backgroundColor: '#121212' }}>
+    <Box sx={{display: 'flex', justifyContent: 'center', alignItems: { md: 'center'}, height: '100%', backgroundColor: '#121212' }}>
       <Box sx={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
         <Box>
             <Typography variant='h5' color='#ffffff' fontWeight='bold'>
