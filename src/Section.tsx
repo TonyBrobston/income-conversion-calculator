@@ -5,7 +5,7 @@ export default function Section({
   title,
   children,
 }: Readonly<{
-  title: string;
+  title?: React.ReactNode;
   children?: React.ReactNode;
 }>) {
   return <Box sx={{backgroundColor: '#1e1e1e', color: '#ffffff', padding: '24px', borderRadius: '6px'}}>
