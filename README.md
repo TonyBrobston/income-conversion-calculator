@@ -3,6 +3,7 @@
 
 This converter solves the "apples-to-oranges" comparison problem by revealing the hidden costs, such as payroll taxes and healthcare premiums, that an employer typically covers for a W-2 employee. By calculating a 1099 rate that accounts for these missing benefits and unpaid time off, it ensures contractors price their services high enough to maintain their actual standard of living.
 
+You can see a live demo here: https://tonybrobston.github.io/income-conversion-calculator/
 
 
 ---
