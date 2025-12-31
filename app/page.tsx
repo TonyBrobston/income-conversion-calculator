@@ -31,7 +31,7 @@ export default function Home() {
             W2 to 1099 Converter
           </Typography>
         </Box>
-        <Box sx={{display: 'flex', gap: '20px'}}>
+        <Box sx={{display: 'flex', gap: '20px', flexDirection: { xs: 'column', md: 'row' }}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
             <Section title="W2">
               <Field label="Annual Base Salary" autoFocus value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(removeNonNumeric(event.target.value)))}} adornment="$" adornmentPosition="start" />
