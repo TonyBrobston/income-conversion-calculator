@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Box, InputLabel, Input } from "@mui/material";
 
 export default function Field({
@@ -7,14 +7,12 @@ export default function Field({
   onChange,
   adornment,
   adornmentPosition,
-  autoFocus = false,
 }: Readonly<{
   label: string;
   value: number;
   onChange: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   adornment?: string;
   adornmentPosition?: 'start'|'end';
-  autoFocus?: boolean;
 }>) {
   const toKebabCase = (value: string) => value.replaceAll(' ', '-').toLowerCase()
   const id = toKebabCase(label);
