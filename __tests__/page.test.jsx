@@ -100,6 +100,28 @@ describe('Page', () => {
     expect(targetHourlyRate).toHaveTextContent('$53.82');
   })
 
+  it('checks calculator output for base salary, monthly premium, and employer contribution', () => {
+    render(<Page />)
+
+    const annualBaseSalaryInput = screen.getByLabelText('Annual Base Salary');
+    const salary = '100000'
+    fireEvent.change(annualBaseSalaryInput, {target: { value: salary}});
+    expect(annualBaseSalaryInput).toHaveValue(salary);
+
+    const monthlyPremiumInput = screen.getByLabelText('Monthly Premium');
+    const monthlyPremium = '200'
+    fireEvent.change(monthlyPremiumInput, {target: { value: monthlyPremium}});
+    expect(monthlyPremiumInput).toHaveValue(monthlyPremium);
+
+    const employerContributionInput = screen.getByLabelText('Monthly Employer Contribution');
+    const employerContribution = '1000'
+    fireEvent.change(employerContributionInput, {target: { value: employerContribution}});
+    expect(employerContributionInput).toHaveValue(employerContribution);
+
+    const targetHourlyRate = screen.getByLabelText('Target Hourly Rate');
+    expect(targetHourlyRate).toHaveTextContent('$58.67');
+  })
+
   it('should always have two decimals for hourly rate', () => {
     render(<Page />)
 

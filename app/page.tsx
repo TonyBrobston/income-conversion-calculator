@@ -14,6 +14,8 @@ export default function Home() {
   const [annualBonus, setAnnualBonus] = useState(0);
   const [vacationDays, setVacationDays] = useState(0);
   const [holidays, setHolidays] = useState(0);
+  const [monthlyPremium, setMonthlyPremium] = useState(0);
+  const [monthlyEmployerContribution, setMonthlyEmployerContribution] = useState(0);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -25,7 +27,8 @@ export default function Home() {
   const matchDollarAmount = annualBaseSalary * (match / 100);
   const totalW2Value = annualBaseSalary + matchDollarAmount + annualBonus
   const employerFicaTax = annualBaseSalary * 0.0765;
-  const totalTargetRevenue = totalW2Value + employerFicaTax;
+  const annualInsuranceCost = (monthlyPremium + monthlyEmployerContribution) * 12;
+  const totalTargetRevenue = totalW2Value + employerFicaTax + annualInsuranceCost;
   const unpaidDays = vacationDays + holidays;
   const billableHours = 2080 - (unpaidDays * 8);
   const hourlyRate = totalTargetRevenue / billableHours;
@@ -43,13 +46,16 @@ export default function Home() {
         <Box sx={{display: 'flex', gap: '20px', flexDirection: { xs: 'column', md: 'row' }}}>
           <Box sx={{display: 'flex', gap: '8px', flexDirection: 'column'}}>
             <Section title='W2'>
-              <Field label='Annual Base Salary' autoFocus value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(removeNonNumeric(event.target.value)))}} adornment='$' adornmentPosition='start' />
+              <Field label='Annual Base Salary' value={annualBaseSalary} onChange={(event) => {setAnnualBaseSalary(parseInt(removeNonNumeric(event.target.value)))}} adornment='$' adornmentPosition='start' />
               <Field label='401k Match (%)' value={match} onChange={(event) => {setMatch(parseInt(removeNonNumeric(event.target.value)))}} adornment='%' adornmentPosition='end' />
               <Field label='Annual Bonus/Commission' value={annualBonus} onChange={(event) => {setAnnualBonus(parseInt(removeNonNumeric(event.target.value)))}} adornment='$' adornmentPosition='start' />
               <Field label='Vacation Days' value={vacationDays} onChange={(event) => {setVacationDays(parseInt(removeNonNumeric(event.target.value)))}} />
               <Field label='Holidays' value={holidays} onChange={(event) => {setHolidays(parseInt(removeNonNumeric(event.target.value)))}} />
             </Section>
-            <Section title='Benefits & Perks'>(TBD)</Section>
+            <Section title='Benefits & Perks'>
+              <Field label='Monthly Premium' value={monthlyPremium} onChange={(event) => {setMonthlyPremium(parseInt(removeNonNumeric(event.target.value)))}} adornment='$' adornmentPosition='start' />
+              <Field label='Monthly Employer Contribution' value={monthlyEmployerContribution} onChange={(event) => {setMonthlyEmployerContribution(parseInt(removeNonNumeric(event.target.value)))}} adornment='$' adornmentPosition='start' />
+            </Section>
           </Box>
           <Section>
             <Box>
@@ -85,25 +91,26 @@ export default function Home() {
                   }
                 }}
               >
-                <Typography variant="subtitle2" sx={{ mb: 2, color: '#4fc3f7', textAlign: 'center' }}>
-                  CALCULATION FORMULA
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rate =</Typography>
-                  <Box sx={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <Typography variant="body2" sx={{ px: 1 }}>
-                      (Salary + Bonus + Match) × 1.0765
-                    </Typography>
-                    <Box sx={{ width: '100%', height: '1px', bgcolor: 'white', my: 0.5 }} />
-                    <Typography variant="body2" sx={{ px: 1 }}>
-                      2080 - (Days Off × 8)
-                    </Typography>
-                  </Box>
+              <Typography variant="subtitle2" sx={{ mb: 2, color: '#4fc3f7', textAlign: 'center' }}>
+                CALCULATION FORMULA
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
+                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Rate =</Typography>
+                <Box sx={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <Typography variant="body2" sx={{ px: 1, textAlign: 'center' }}>
+                    (Salary × 1.0765) + Bonus + Match + (Monthly Benefits × 12)
+                  </Typography>
+                  <Box sx={{ width: '100%', height: '1px', bgcolor: 'white', my: 0.5 }} />
+                  <Typography variant="body2" sx={{ px: 1 }}>
+                    2080 - (Unpaid Days × 8)
+                  </Typography>
                 </Box>
-                <Box sx={{ mt: 2, pt: 1, borderTop: '1px solid #444', display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="caption" sx={{ opacity: 0.6 }}>1.0765 = Employer Tax</Typography>
-                  <Typography variant="caption" sx={{ opacity: 0.6 }}>2080 = Yearly Hours</Typography>
-                </Box>
+              </Box>
+              <Box sx={{ mt: 2, pt: 1, borderTop: '1px solid #444', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 1 }}>
+                <Typography variant="caption" sx={{ opacity: 0.6 }}>1.0765 = Employer FICA Tax</Typography>
+                <Typography variant="caption" sx={{ opacity: 0.6 }}>Benefits = EE + ER Premiums</Typography>
+                <Typography variant="caption" sx={{ opacity: 0.6 }}>2080 = Work Hours/Year</Typography>
+              </Box>
               </Popover>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
